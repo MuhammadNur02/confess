@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Kamu ❤️</title>
+<title>Untuk Galuh ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
@@ -20,20 +20,37 @@ body{
     color:white;
 }
 
-/* STAR */
-.stars{position:absolute;width:100%;height:100%;}
+/* ⭐ STARS LOOP */
+.stars, .hearts{
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
 .stars span{
     position:absolute;
     width:2px;height:2px;
     background:white;
-    animation:twinkle 5s infinite;
+    animation:star 8s linear infinite;
 }
-@keyframes twinkle{
-    0%,100%{opacity:.2;}
-    50%{opacity:1;}
+@keyframes star{
+    from{transform:translateY(0);opacity:.2;}
+    to{transform:translateY(100vh);opacity:1;}
 }
 
-/* CARD */
+/* 💖 FLOATING HEARTS */
+.hearts span{
+    position:absolute;
+    font-size:18px;
+    animation:heart 6s linear infinite;
+}
+@keyframes heart{
+    0%{transform:translateY(100vh);opacity:0;}
+    50%{opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* 💌 CARD */
 .card{
     width:90%;
     max-width:420px;
@@ -42,22 +59,22 @@ body{
     border-radius:25px;
     padding:30px;
     text-align:center;
-    animation:fadeIn 1.5s ease;
+    animation:pulse 4s infinite;
 }
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(30px);}
-    to{opacity:1;}
+@keyframes pulse{
+    0%,100%{box-shadow:0 0 10px pink;}
+    50%{box-shadow:0 0 30px hotpink;}
 }
 
 .title{
     font-family:'Great Vibes',cursive;
     font-size:36px;
     margin-bottom:15px;
-    animation:glow 2s infinite alternate;
+    animation:glow 2.5s infinite alternate;
 }
 @keyframes glow{
     from{text-shadow:0 0 5px pink;}
-    to{text-shadow:0 0 20px hotpink;}
+    to{text-shadow:0 0 25px hotpink;}
 }
 
 .question{font-size:18px;line-height:1.6;margin-bottom:25px;}
@@ -75,23 +92,64 @@ button{
 .no{background:#444;color:white;}
 button:hover{transform:scale(1.1);}
 
+/* ✉️ ENVELOPE */
+.envelope{
+    width:120px;
+    height:80px;
+    background:#ff5fa2;
+    margin:20px auto;
+    position:relative;
+    border-radius:5px;
+    cursor:pointer;
+}
+.envelope::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:#ff85b3;
+    clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%);
+}
+.letter{
+    display:none;
+    background:white;
+    color:#333;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    animation:open 1s ease;
+}
+@keyframes open{
+    from{transform:translateY(20px);opacity:0;}
+    to{transform:translateY(0);opacity:1;}
+}
+
 /* RESULT */
 .result{display:none;}
-.heart{font-size:40px;animation:beat 1.2s infinite;}
+.bigHeart{
+    font-size:45px;
+    animation:beat 1.2s infinite;
+}
 @keyframes beat{
     0%,100%{transform:scale(1);}
-    50%{transform:scale(1.3);}
+    50%{transform:scale(1.4);}
 }
 </style>
 </head>
 
 <body>
 
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0e6b4d8f6b.mp3?filename=romantic-love-110624.mp3">
+</audio>
+
 <div class="stars"></div>
+<div class="hearts"></div>
 
 <div class="card" id="main">
-    <div class="title">Untuk Kamu</div>
+    <div class="title">Untuk Galuh ❤️</div>
     <div class="question">
+        Galuh Tirta Kencana,<br><br>
         "Apakah Kamu Bersedia Menjadi Pasanganku<br>
         Mulai Hari Ini dan Selamanya?"
     </div>
@@ -102,57 +160,76 @@ button:hover{transform:scale(1.1);}
 </div>
 
 <div class="card result" id="yes">
-    <div class="heart">❤️</div>
+    <div class="bigHeart">❤️</div>
     <div class="title">Alhamdulillah</div>
-    <p>
-        Ya Allah, satukanlah hati kami dalam kebaikan.<br><br>
-        Aku berjanji akan menjaga perasaanmu,<br>
-        menemanimu dalam lelah dan bahagia.<br><br>
-        Bukan hanya hari ini,<br>
-        tapi selamanya 💕
-    </p>
+
+    <div class="envelope" id="openLetter"></div>
+    <div class="letter" id="letter">
+        Galuh,  
+        semoga Allah menjaga langkah kita.  
+        Aku ingin belajar mencintaimu dengan cara yang baik,  
+        saling menjaga, saling menguatkan.  
+        Bukan hanya hari ini,  
+        tapi sampai nanti dan selamanya 💕
+    </div>
 </div>
 
 <div class="card result" id="no">
-    <div class="heart">💔</div>
-    <div class="title">Aku Mengerti</div>
+    <div class="bigHeart">💔</div>
+    <div class="title">Aku Mengerti, Galuh</div>
     <p>
-        Jika hari ini belum bisa,<br>
-        aku akan menghargainya.<br><br>
+        Jika hari ini belum bisa, aku akan menghormatinya.<br><br>
         Izinkan aku membuktikan kesungguhanku,<br>
-        dengan sikap, waktu, dan tanggung jawab.<br><br>
-        Mungkin bukan sekarang,<br>
-        tapi suatu hari nanti ✨
+        bukan lewat kata, tapi tindakan.<br><br>
+        Mungkin suatu hari nanti 🌙
     </p>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",()=>{
 
-    // Generate stars
+    const music=document.getElementById('music');
+
+    // Stars
     const stars=document.querySelector('.stars');
-    for(let i=0;i<120;i++){
+    for(let i=0;i<100;i++){
         let s=document.createElement('span');
-        s.style.top=Math.random()*100+'%';
         s.style.left=Math.random()*100+'%';
-        s.style.animationDelay=Math.random()*5+'s';
+        s.style.animationDelay=Math.random()*8+'s';
         stars.appendChild(s);
     }
+
+    // Hearts
+    const hearts=document.querySelector('.hearts');
+    setInterval(()=>{
+        let h=document.createElement('span');
+        h.innerHTML='💖';
+        h.style.left=Math.random()*100+'%';
+        hearts.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    },500);
 
     // Buttons
     const main=document.getElementById('main');
     const yes=document.getElementById('yes');
     const no=document.getElementById('no');
 
-    document.getElementById('yesBtn').addEventListener('click',()=>{
+    document.getElementById('yesBtn').onclick=()=>{
+        music.play();
         main.style.display='none';
         yes.style.display='block';
-    });
+    };
 
-    document.getElementById('noBtn').addEventListener('click',()=>{
+    document.getElementById('noBtn').onclick=()=>{
+        music.play();
         main.style.display='none';
         no.style.display='block';
-    });
+    };
+
+    // Letter open
+    document.getElementById('openLetter').onclick=()=>{
+        document.getElementById('letter').style.display='block';
+    };
 
 });
 </script>
