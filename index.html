@@ -20,8 +20,8 @@ body{
     color:#f5f5f5;
 }
 
-/* ⭐ STARS */
-.stars, .hearts{
+/* STARS */
+.stars,.hearts{
     position:absolute;
     width:100%;
     height:100%;
@@ -29,31 +29,209 @@ body{
 }
 .stars span{
     position:absolute;
-    width:2px;
-    height:2px;
-    background:#e0f0ff;
-    animation:starMove 9s linear infinite;
+    width:2px;height:2px;
+    background:#cfe9ff;
+    animation:star 9s linear infinite;
 }
-@keyframes starMove{
+@keyframes star{
     from{transform:translateY(-10vh);opacity:.2;}
     to{transform:translateY(110vh);opacity:1;}
 }
 
-/* 💙 HEARTS */
+/* HEARTS */
 .hearts span{
     position:absolute;
     font-size:18px;
-    animation:heartFloat 7s linear infinite;
     color:#4da6ff;
+    animation:heart 7s linear infinite;
 }
-@keyframes heartFloat{
+@keyframes heart{
     0%{transform:translateY(100vh);opacity:0;}
     50%{opacity:1;}
     100%{transform:translateY(-10vh);opacity:0;}
 }
 
-/* 💌 CARD */
+/* CARD */
 .card{
     width:90%;
     max-width:420px;
-    backg
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(14px);
+    border-radius:26px;
+    padding:32px;
+    text-align:center;
+    border:1px solid rgba(77,166,255,.3);
+    animation:pulse 5s infinite;
+}
+@keyframes pulse{
+    0%,100%{box-shadow:0 0 12px rgba(77,166,255,.3);}
+    50%{box-shadow:0 0 35px rgba(77,166,255,.8);}
+}
+
+.title{
+    font-family:'Great Vibes',cursive;
+    font-size:36px;
+    margin-bottom:15px;
+    color:#cfe9ff;
+    animation:glow 3s infinite alternate;
+}
+@keyframes glow{
+    from{text-shadow:0 0 6px #4da6ff;}
+    to{text-shadow:0 0 26px #9fd3ff;}
+}
+
+.question{font-size:18px;line-height:1.7;margin-bottom:25px;}
+
+.buttons{display:flex;justify-content:space-around;}
+button{
+    padding:12px 32px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+.yes{background:linear-gradient(135deg,#4da6ff,#1e6fd9);color:white;}
+.no{background:#111;color:#cfcfcf;border:1px solid #4da6ff;}
+button:hover{transform:scale(1.12);}
+
+/* RESULT */
+.result{display:none;}
+.bigHeart{
+    font-size:48px;
+    color:#4da6ff;
+    animation:beat 1.3s infinite;
+}
+@keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.4);}
+}
+
+/* LETTER */
+.envelope{
+    width:130px;height:85px;
+    margin:20px auto;
+    background:#1e6fd9;
+    border-radius:6px;
+    position:relative;
+    cursor:pointer;
+}
+.envelope::before{
+    content:'';
+    position:absolute;
+    width:100%;height:100%;
+    background:#4da6ff;
+    clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%);
+}
+.letter{
+    display:none;
+    background:#f9fbff;
+    color:#111;
+    padding:18px;
+    border-radius:12px;
+    margin-top:18px;
+    animation:open 1s ease;
+}
+@keyframes open{
+    from{opacity:0;transform:translateY(25px);}
+    to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0e6b4d8f6b.mp3">
+</audio>
+
+<div class="stars"></div>
+<div class="hearts"></div>
+
+<div class="card" id="main">
+    <div class="title">Untuk Galuh</div>
+    <div class="question">
+        Galuh Tirta Kencana,<br><br>
+        Apakah kamu bersedia menjadi pasanganku  
+        mulai hari ini dan selamanya?
+    </div>
+    <div class="buttons">
+        <button class="yes" id="yesBtn">Ya</button>
+        <button class="no" id="noBtn">Tidak</button>
+    </div>
+</div>
+
+<div class="card result" id="yes">
+    <div class="bigHeart">💙</div>
+    <div class="title">Alhamdulillah</div>
+    <div class="envelope" id="openLetter"></div>
+    <div class="letter" id="letter">
+        Galuh, semoga Allah menuntun langkah kita.  
+        Aku ingin mencintaimu dengan tenang, dewasa,  
+        dan penuh tanggung jawab.  
+        Sampai nanti dan selamanya.
+    </div>
+</div>
+
+<div class="card result" id="no">
+    <div class="bigHeart">🤍</div>
+    <div class="title">Aku Mengerti, Galuh</div>
+    <p>
+        Jika hari ini belum bisa,  
+        aku akan membuktikan kesungguhanku  
+        dengan waktu dan tindakan.  
+        Suatu hari nanti.
+    </p>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const music = document.getElementById('music');
+    const main = document.getElementById('main');
+    const yes = document.getElementById('yes');
+    const no = document.getElementById('no');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const openLetter = document.getElementById('openLetter');
+    const letter = document.getElementById('letter');
+
+    // stars
+    const stars=document.querySelector('.stars');
+    for(let i=0;i<120;i++){
+        let s=document.createElement('span');
+        s.style.left=Math.random()*100+'%';
+        s.style.animationDelay=Math.random()*9+'s';
+        stars.appendChild(s);
+    }
+
+    // hearts
+    const hearts=document.querySelector('.hearts');
+    setInterval(()=>{
+        let h=document.createElement('span');
+        h.innerHTML='💙';
+        h.style.left=Math.random()*100+'%';
+        hearts.appendChild(h);
+        setTimeout(()=>h.remove(),7000);
+    },600);
+
+    yesBtn.addEventListener('click',()=>{
+        music.play();
+        main.style.display='none';
+        yes.style.display='block';
+    });
+
+    noBtn.addEventListener('click',()=>{
+        music.play();
+        main.style.display='none';
+        no.style.display='block';
+    });
+
+    openLetter.addEventListener('click',()=>{
+        letter.style.display='block';
+    });
+});
+</script>
+
+</body>
+</html>
