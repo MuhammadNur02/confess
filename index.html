@@ -3,235 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Galuh</title>
+<title>Untukmu 🤍</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
-body{
-    height:100vh;
-    background:radial-gradient(circle at top,#0a0f1f,#000);
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#f5f5f5;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* STARS */
-.stars,.hearts{
-    position:absolute;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-}
-.stars span{
-    position:absolute;
-    width:2px;height:2px;
-    background:#cfe9ff;
-    animation:star 9s linear infinite;
-}
-@keyframes star{
-    from{transform:translateY(-10vh);opacity:.2;}
-    to{transform:translateY(110vh);opacity:1;}
+body {
+    height: 100vh;
+    background: linear-gradient(180deg, #020617, #0a1a2f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
 }
 
-/* HEARTS */
-.hearts span{
-    position:absolute;
-    font-size:18px;
-    color:#4da6ff;
-    animation:heart 7s linear infinite;
+/* BINTANG */
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
 }
-@keyframes heart{
-    0%{transform:translateY(100vh);opacity:0;}
-    50%{opacity:1;}
-    100%{transform:translateY(-10vh);opacity:0;}
+.stars span {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.7;
+    animation: twinkle 5s infinite linear;
 }
-
-/* CARD */
-.card{
-    width:90%;
-    max-width:420px;
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(14px);
-    border-radius:26px;
-    padding:32px;
-    text-align:center;
-    border:1px solid rgba(77,166,255,.3);
-    animation:pulse 5s infinite;
-}
-@keyframes pulse{
-    0%,100%{box-shadow:0 0 12px rgba(77,166,255,.3);}
-    50%{box-shadow:0 0 35px rgba(77,166,255,.8);}
+@keyframes twinkle {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
 }
 
-.title{
-    font-family:'Great Vibes',cursive;
-    font-size:36px;
-    margin-bottom:15px;
-    color:#cfe9ff;
-    animation:glow 3s infinite alternate;
-}
-@keyframes glow{
-    from{text-shadow:0 0 6px #4da6ff;}
-    to{text-shadow:0 0 26px #9fd3ff;}
+/* CONTAINER */
+.container {
+    perspective: 1200px;
 }
 
-.question{font-size:18px;line-height:1.7;margin-bottom:25px;}
-
-.buttons{display:flex;justify-content:space-around;}
-button{
-    padding:12px 32px;
-    border:none;
-    border-radius:30px;
-    font-size:16px;
-    cursor:pointer;
-    transition:.3s;
-}
-.yes{background:linear-gradient(135deg,#4da6ff,#1e6fd9);color:white;}
-.no{background:#111;color:#cfcfcf;border:1px solid #4da6ff;}
-button:hover{transform:scale(1.12);}
-
-/* RESULT */
-.result{display:none;}
-.bigHeart{
-    font-size:48px;
-    color:#4da6ff;
-    animation:beat 1.3s infinite;
-}
-@keyframes beat{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.4);}
+/* KERTAS */
+.paper {
+    position: absolute;
+    width: 320px;
+    height: 420px;
+    background: linear-gradient(145deg, #ffffff, #e6f0ff);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transform-style: preserve-3d;
+    transition: transform 1s ease, opacity 1s ease;
 }
 
-/* LETTER */
-.envelope{
-    width:130px;height:85px;
-    margin:20px auto;
-    background:#1e6fd9;
-    border-radius:6px;
-    position:relative;
-    cursor:pointer;
+.paper h2 {
+    font-family: 'Playfair Display', serif;
+    color: #0a2540;
+    margin-bottom: 18px;
 }
-.envelope::before{
-    content:'';
-    position:absolute;
-    width:100%;height:100%;
-    background:#4da6ff;
-    clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%);
+
+.paper p {
+    color: #1f2937;
+    font-size: 15px;
+    line-height: 1.6;
 }
-.letter{
-    display:none;
-    background:#f9fbff;
-    color:#111;
-    padding:18px;
-    border-radius:12px;
-    margin-top:18px;
-    animation:open 1s ease;
+
+.paper button {
+    margin-top: 20px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
 }
-@keyframes open{
-    from{opacity:0;transform:translateY(25px);}
-    to{opacity:1;transform:translateY(0);}
+
+.paper button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(96,165,250,0.8);
 }
+
+.paper.hidden {
+    transform: translateY(-80px) rotateX(25deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* TUMPUKAN */
+.paper:nth-child(1) { transform: rotate(-2deg); }
+.paper:nth-child(2) { transform: rotate(2deg); }
+.paper:nth-child(3) { transform: rotate(-1deg); }
+
+/* DEKORASI LILIN */
+.candle {
+    position: absolute;
+    bottom: 40px;
+    width: 10px;
+    height: 40px;
+    background: #fff;
+    border-radius: 5px;
+}
+.flame {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, #ffd700, #ff6b00);
+    border-radius: 50%;
+    animation: flicker 1s infinite;
+}
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.2); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
 </style>
 </head>
-
 <body>
 
-<audio id="music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0e6b4d8f6b.mp3">
-</audio>
-
 <div class="stars"></div>
-<div class="hearts"></div>
 
-<div class="card" id="main">
-    <div class="title">Untuk Galuh</div>
-    <div class="question">
-        Galuh Tirta Kencana,<br><br>
-        Apakah kamu bersedia menjadi pasanganku  
-        mulai hari ini dan selamanya?
+<div class="container">
+
+    <!-- SLIDE 1 -->
+    <div class="paper" id="slide1">
+        <h2>Sayang 🤍</h2>
+        <p>
+            Apakah kamu bersedia  
+            menjadi <b>Pasanganku</b>?
+        </p>
+        <button onclick="yes()">Ya</button>
+        <button onclick="no()" style="background:#111827;">Tidak</button>
     </div>
-    <div class="buttons">
-        <button class="yes" id="yesBtn">Ya</button>
-        <button class="no" id="noBtn">Tidak</button>
+
+    <!-- SLIDE 2 YA -->
+    <div class="paper hidden" id="slideYes">
+        <h2>Terima Kasih 🤍</h2>
+        <p>
+            Aku sangat bersyukur dipertemukan denganmu.  
+            Aku berjanji akan menjagamu,  
+            menghargaimu, dan mencintaimu  
+            dengan caraku yang paling tulus.
+        </p>
+        <button onclick="next()">Lanjut</button>
     </div>
-</div>
 
-<div class="card result" id="yes">
-    <div class="bigHeart">💙</div>
-    <div class="title">Alhamdulillah</div>
-    <div class="envelope" id="openLetter"></div>
-    <div class="letter" id="letter">
-        Galuh, semoga Allah menuntun langkah kita.  
-        Aku ingin mencintaimu dengan tenang, dewasa,  
-        dan penuh tanggung jawab.  
-        Sampai nanti dan selamanya.
+    <!-- SLIDE 3 AKHIR -->
+    <div class="paper hidden" id="slideEnd">
+        <h2>Untuk Selamanya ✨</h2>
+        <p>
+            Bukan tentang seberapa cepat,  
+            tapi seberapa sungguh aku menjagamu.  
+            Dinner malam ini hanyalah awal  
+            dari banyak momen indah bersama.
+        </p>
     </div>
-</div>
 
-<div class="card result" id="no">
-    <div class="bigHeart">🤍</div>
-    <div class="title">Aku Mengerti, Galuh</div>
-    <p>
-        Jika hari ini belum bisa,  
-        aku akan membuktikan kesungguhanku  
-        dengan waktu dan tindakan.  
-        Suatu hari nanti.
-    </p>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-
-    const music = document.getElementById('music');
-    const main = document.getElementById('main');
-    const yes = document.getElementById('yes');
-    const no = document.getElementById('no');
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const openLetter = document.getElementById('openLetter');
-    const letter = document.getElementById('letter');
-
-    // stars
-    const stars=document.querySelector('.stars');
-    for(let i=0;i<120;i++){
-        let s=document.createElement('span');
-        s.style.left=Math.random()*100+'%';
-        s.style.animationDelay=Math.random()*9+'s';
-        stars.appendChild(s);
-    }
-
-    // hearts
-    const hearts=document.querySelector('.hearts');
-    setInterval(()=>{
-        let h=document.createElement('span');
-        h.innerHTML='💙';
-        h.style.left=Math.random()*100+'%';
-        hearts.appendChild(h);
-        setTimeout(()=>h.remove(),7000);
-    },600);
-
-    yesBtn.addEventListener('click',()=>{
-        music.play();
-        main.style.display='none';
-        yes.style.display='block';
-    });
-
-    noBtn.addEventListener('click',()=>{
-        music.play();
-        main.style.display='none';
-        no.style.display='block';
-    });
-
-    openLetter.addEventListener('click',()=>{
-        letter.style.display='block';
-    });
-});
-</script>
-
-</body>
-</html>
+    <!-- SLIDE TIDAK -->
+    <div class="paper hidden" id="slideNo">
+        <h2>Aku Mengerti 🤍</h2>
+        <p>
+            Aku akan menghargai keputusanmu.  
+            Terima kasih atas kejuj
